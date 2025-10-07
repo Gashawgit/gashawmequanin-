@@ -1,0 +1,8 @@
+img{
+    background-color: blue;
+    display:flex;
+    border:10px dashed green;
+    margin: 60px;
+    padding:10px;
+    transition: background-color 0.3s ease;
+}

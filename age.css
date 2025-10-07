@@ -1,0 +1,14 @@
+body {
+    background-color: red;
+    color: green;
+}
+
+div {
+    background-color: rgb(2, 255, 14);
+    padding: 50px;
+    margin: 50px;
+}
+
+button {
+    cursor: pointer;
+}

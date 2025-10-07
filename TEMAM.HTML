@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App (No API Key)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-left: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Simple Weather App</h1>
+    <input type="text" id="city" placeholder="Enter city name">
+    <button onclick="getWeather()">Get Weather</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function getWeather() {
+            const city = document.getElementById("city").value;
+            if (!city) return;
+
+            document.getElementById("result").innerText = "⏳ Loading...";
+
+            try {
+                // Step 1: Convert city name → coordinates (Open-Meteo geocoding API)
+                let geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`;
+                let geoRes = await fetch(geoUrl);
+                let geoData = await geoRes.json();
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    document.getElementById("result").innerText = "❌ City not found";
+                    return;
+                }
+
+                let lat = geoData.results[0].latitude;
+                let lon = geoData.results[0].longitude;
+                let cityName = geoData.results[0].name;
+                let country = geoData.results[0].country;
+
+                // Step 2: Get weather from Open-Meteo
+                let weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                let weatherRes = await fetch(weatherUrl);
+                let weatherData = await weatherRes.json();
+
+                let temp = weatherData.current_weather.temperature;
+                let wind = weatherData.current_weather.windspeed;
+                let cond = weatherData.current_weather.weathercode;
+
+                document.getElementById("result").innerHTML = `
+          <h2>${cityName}, ${country}</h2>
+          🌡️ Temp: ${temp}°C <br>
+          🌬️ Wind: ${wind} km/h <br>
+          ⛅ Code: ${cond}
+        `;
+            } catch (err) {
+                document.getElementById("result").innerText = "⚠️ Error fetching weather";
+            }
+        }
+    </script>
+</body>
+
+</html>

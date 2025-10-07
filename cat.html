@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="fog"> This is Heading one</h1>
+    <H1 id="one">This is heading two</H1>
+    <input type="date" id="data">
+    <button onclick="Agecalculator()">calculate</button>
+    <script>
+        function Agecalculator() {
+            let one = document.getElementById("data").value;
+            let onee = new Date(one);
+            let d = onee.getFullYear();
+            let f = onee.getMonth();
+            let G = onee.getDate();
+            let today = new Date();
+            let f1 = today.getFullYear();
+            let f2 = today.getMonth();
+            let f3 = today.getDate();
+            let a = f1 - d;
+            let b = f2 - f;
+            let c = f3 - G;
+            let young = document.getElementById("fog");
+            young.style.color = "green";
+            young.style.border = "1px solid red";
+            young.style.borderRadius = "20px";
+            young.innerHTML = "year " + a + " month " + b + " Date " + c;
+        }
+    </script>
+</body>
+
+</html>

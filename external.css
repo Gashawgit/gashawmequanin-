@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(13, 202, 76);
+    margin-left: 20px;
+}
+
+button {
+    font-size: 18px;
+}
+
+#cal {
+    padding: 1%;
+    background-color: blanchedalmond;
+}
+
+div {
+    background-color: rgb(67, 4, 243);
+    color: red;
+    margin-left: 50px;
+    margin-right: 400px;
+    margin-bottom: 0%;
+    padding-bottom: 600px;
+}
